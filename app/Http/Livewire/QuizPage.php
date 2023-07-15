@@ -19,7 +19,7 @@ class QuizPage extends Component
 
     public function mount()
     {
-        $questions = Question::with('answers')->get();
+        $questions = Question::with('answers')->inRandomOrder()->limit(10)->get();
 
         foreach ($questions as $question) {
             $this->questions[] = [
