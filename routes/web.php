@@ -29,12 +29,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/quiz', function () {
+
+    // check if users quiz record is present
+    $record = QuizSubmission::where('user_id', \Auth::user()->id)->exists();
+
+    // if user has given a quiz then redirect to home
+    if ($record) {
+        return redirect()->route('dashboard');
+    }
     return view('quiz');
 })->middleware(['auth', 'verified'])->name('quiz');
 
 Route::get('/leaderboard', function () {
 
-    $leaderboards = QuizSubmission::latest()->paginate(10);
+    $leaderboards = QuizSubmission::orderBy('score', 'desc')->paginate(10);
 
     return view('leaderboard', compact('leaderboards'));
 })->middleware(['auth', 'verified'])->name('leaderboard');
