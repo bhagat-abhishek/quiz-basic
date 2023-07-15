@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Question;
+use App\Mail\ResultEmail;
 use App\Models\QuizSubmission;
+use Illuminate\Support\Facades\Mail;
 
 class QuizPage extends Component
 {
@@ -74,6 +76,9 @@ class QuizPage extends Component
             'score' => $this->score,
             'total_questions' => $this->totalQuestions,
         ]);
+
+        // Mail to user result
+        Mail::to(auth()->user()->email)->send(new ResultEmail($this->score));
 
         // Redirect to the result page
         return redirect()->route('quiz.result', ['score' => $this->score]);
