@@ -13,10 +13,11 @@
                     @if (Auth::user()->scores)
                         <span class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Your Score:
                             {{ Auth::user()->scores->score }}</span>
+                    @else
+                        <a href="{{ route('quiz') }}"
+                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Start
+                            Quiz</a>
                     @endif
-
-                    <a href="{{ route('quiz') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Start
-                        Quiz</a>
                     <a href="{{ route('leaderboard') }}"
                         class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-blue-600">Leaderboard</a>
 
