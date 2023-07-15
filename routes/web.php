@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/quiz/result', function () {
     return view('results');
-})->name('quiz.result');
+})->middleware(['auth', 'verified'])->name('quiz.result');
 
 
 Route::get('/dashboard', function () {
