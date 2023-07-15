@@ -10,8 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <a href="{{ route('quiz') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Start Quiz</a>
-                    <a href="{{ route('leaderboard') }}" class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-blue-600">Leaderboard</a>
+                    @if (Auth::user()->scores)
+                        <span class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Your Score:
+                            {{ Auth::user()->scores->score }}</span>
+                    @endif
+
+                    <a href="{{ route('quiz') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Start
+                        Quiz</a>
+                    <a href="{{ route('leaderboard') }}"
+                        class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-blue-600">Leaderboard</a>
+
 
                 </div>
 
