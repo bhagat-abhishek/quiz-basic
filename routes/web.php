@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\QuizSubmission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,17 @@ Route::get('/quiz/result', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/quiz', function () {
+    return view('quiz');
+})->middleware(['auth', 'verified'])->name('quiz');
+
+Route::get('/leaderboard', function () {
+
+    $leaderboards = QuizSubmission::latest()->paginate(10);
+
+    return view('leaderboard', compact('leaderboards'));
+})->middleware(['auth', 'verified'])->name('leaderboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

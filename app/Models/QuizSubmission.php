@@ -14,4 +14,8 @@ class QuizSubmission extends Model
         'score',
         'total_questions',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
